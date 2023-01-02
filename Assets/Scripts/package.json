@@ -1,8 +1,22 @@
 {
-	"name": "Obert.Audio",
-	"version": "0.1.0",
-	"displayName": "Obert - Audio",
-	"autor": {
-		"name": "Martin Obert"
-	}
+  "name": "com.obert.audio",
+  "version": "0.1.0",
+  "displayName": "Obert - Audio",
+  "description": "Audio plugin",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  
+ "keywords": [
+    "obert",
+    "audio",
+    "sfx"
+  ],
+  "author": {
+    "name": "Martin Obert",
+    "email": "martin@obert.cz",
+    "url": "https://github.com/martin-obert/unity-plugins-audio"
+  }
 }
