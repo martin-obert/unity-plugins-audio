@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8095653b36ed48deae15b5cb274e0f2a, type: 3}
+  m_Name: Sfx Bag - Footsteps (Grass) Run
+  m_EditorClassIdentifier: 
+  bagName: 
+  selectionType: 0
+  scriptableSfxBagFilter: {fileID: 11400000, guid: 7bc9647d88574ee4388db62dbf3b21b0, type: 2}
+  clips:
+  - {fileID: 8300000, guid: 3b1e994a14fa87843a507e73b745ac59, type: 3}
+  - {fileID: 8300000, guid: 7b896648d46ceb04f8f82938f103fabb, type: 3}
+  - {fileID: 8300000, guid: a5e00bb9300634445b9c18e42767d74e, type: 3}
+  - {fileID: 8300000, guid: 15222f3fd60d6074498c4b8f42c7a9d9, type: 3}
+  - {fileID: 8300000, guid: e6f78e119c3fb564395ab886883d381e, type: 3}
+  groundTypeTag: 1

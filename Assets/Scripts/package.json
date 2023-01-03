@@ -18,5 +18,11 @@
     "name": "Martin Obert",
     "email": "martin@obert.cz",
     "url": "https://github.com/martin-obert/unity-plugins-audio"
-  }
+  },
+   "samples": [
+        {
+            "displayName": "Basic",
+            "description": "Minimal setup and examples for this package",
+            "path": "Samples~/Basic"
+        }
 }
