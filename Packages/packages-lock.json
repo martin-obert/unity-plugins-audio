@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.obert.common": {
+      "version": "https://github.com/martin-obert/unity-plugins-common.git?path=Assets/Scripts",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "884eb7ba3a4245de4f26ca8165d27c399423516a"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.6",
       "depth": 1,

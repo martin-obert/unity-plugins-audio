@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "displayName": "Obert - Audio",
   "description": "Audio plugin",
-  "unity": "2019.1",
-  "unityRelease": "0b5",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
-  
- "keywords": [
+  "unity": "2021.3",
+  "unityRelease": "9f1",
+  "documentationUrl": "https://github.com/martin-obert/unity-plugins-audio",
+  "changelogUrl": "https://github.com/martin-obert/unity-plugins-audio",
+  "licensesUrl": "https://github.com/martin-obert/unity-plugins-audio",
+  "keywords": [
     "obert",
     "audio",
     "sfx"
@@ -17,12 +16,15 @@
   "author": {
     "name": "Martin Obert",
     "email": "martin@obert.cz",
-    "url": "https://github.com/martin-obert/unity-plugins-audio"
+    "url": "https://github.com/martin-obert"
   },
-   "samples": [
-        {
-            "displayName": "Basic",
-            "description": "Minimal setup and examples for this package",
-            "path": "Samples~/Basic"
-        }
-}
+  "dependencies": {
+    "com.obert.common": "https://github.com/martin-obert/unity-plugins-common.git?path=Assets/Scripts"
+  },
+  "samples": [
+    {
+      "displayName": "Basic",
+      "description": "Minimal setup and examples for this package",
+      "path": "Samples~/Basic"
+    }
+    }
