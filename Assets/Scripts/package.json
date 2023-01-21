@@ -19,7 +19,7 @@
     "url": "https://github.com/martin-obert"
   },
   "dependencies": {
-    "com.obert.common": "https://github.com/martin-obert/unity-plugins-common.git#v1.0.0"
+    "com.obert.common": "0.1.0"
   },
   "samples": [
     {
