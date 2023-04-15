@@ -63,14 +63,14 @@ ModelImporter:
       - time: 0.33458647
         functionName: PlaySfx
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 6070fae332122714fad924c6ccfa0bed, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: 70ec3a979fcc5ea479a1030ef6bbfe23, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8233083
         functionName: PlaySfx
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 6070fae332122714fad924c6ccfa0bed, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: 70ec3a979fcc5ea479a1030ef6bbfe23, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

@@ -2,7 +2,7 @@
 {
     public interface ISfxPlayer
     {
-        bool CanConsumeTrigger(SfxTrigger trigger);
-        void PlaySfx();
+        void PlaySfx(string tag);
+        void PlaySfx(ISfxAudioClipBag bag);
     }
 }

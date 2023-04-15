@@ -22,10 +22,17 @@ namespace Obert.Audio.Runtime
 
             public void ConsumerSfxTrigger(SfxTrigger trigger)
             {
-                var players = _players.Where(x => x.CanConsumeTrigger(trigger)).ToArray();
-                foreach (var player in players)
+                foreach (var player in _players)
                 {
-                    player.PlaySfx();
+                    player.PlaySfx(trigger.Tag);
+                }
+            }
+
+            public void PlayBag(ISfxAudioClipBag bag)
+            {
+                foreach (var player in _players)
+                {
+                    player.PlaySfx(bag);
                 }
             }
         }
@@ -37,9 +44,15 @@ namespace Obert.Audio.Runtime
 
         public void PlaySfx(Object signal)
         {
-            Debug.Log(signal?.GetType());
-            if (signal is SfxTrigger trigger)
-                _controller.ConsumerSfxTrigger(trigger);
+            switch (signal)
+            {
+                case SfxTrigger trigger:
+                    _controller.ConsumerSfxTrigger(trigger);
+                    break;
+                case ISfxAudioClipBag bag:
+                    _controller.PlayBag(bag);
+                    break;
+            }
         }
     }
 }

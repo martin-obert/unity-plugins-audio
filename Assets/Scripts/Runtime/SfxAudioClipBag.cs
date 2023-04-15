@@ -10,12 +10,13 @@ namespace Obert.Audio.Runtime
     {
         [SerializeField] private AudioClip[] clips;
         [SerializeField] private string[] tags;
-        
+
         private int _lastSelected;
-        
+
         [SerializeField] private AudioClipSelectionMethod selectionMethod;
-        
+
         private IAudioClip[] _audioClips;
+        private string Tag => SfxTagHelpers.GetTag(tags);
 
         public IAudioClip GetAudioClip()
         {
@@ -26,6 +27,11 @@ namespace Obert.Audio.Runtime
                 .OfType<IAudioClip>()
                 .ToArray();
 
+            return SelectClip();
+        }
+
+        private IAudioClip SelectClip()
+        {
             switch (selectionMethod)
             {
                 case AudioClipSelectionMethod.Random:
@@ -40,6 +46,6 @@ namespace Obert.Audio.Runtime
             }
         }
 
-        public bool HasTag(string tag) => tags.Contains(tag);
+        public bool HasTag(string tag) => Tag.Equals(tag, StringComparison.InvariantCultureIgnoreCase);
     }
 }

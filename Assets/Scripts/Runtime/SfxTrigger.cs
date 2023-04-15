@@ -2,8 +2,10 @@
 
 namespace Obert.Audio.Runtime
 {
-    public abstract class SfxTrigger : ScriptableObject
+    [CreateAssetMenu(menuName = "Audio/Sfx Trigger", fileName = "Sfx Trigger", order = 0)]
+    public sealed class SfxTrigger : ScriptableObject
     {
-        protected const string MenuCategory = "Audio/Sfx Triggers/";
+        [SerializeField] private string[] tags;
+        public string Tag => SfxTagHelpers.GetTag(tags);
     }
 }
