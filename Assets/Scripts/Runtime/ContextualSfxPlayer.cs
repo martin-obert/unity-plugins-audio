@@ -30,17 +30,45 @@ namespace Obert.Audio.Runtime
                 _audioSources = audioSources ?? throw new ArgumentNullException(nameof(audioSources));
             }
 
-            public void PlaySfx(string tag)
+            private void PlaySfxFromTrigger(string tag)
             {
+                if (string.IsNullOrWhiteSpace(tag))
+                {
+                    return;
+                }
+
                 var clipBags = _clipBags
                     .Where(x => x.HasTag(tag)).ToArray();
 
-                foreach (var bag in clipBags) PlaySfx(bag);
+                foreach (var bag in clipBags)
+                {
+                    PlaySfxFromBag(bag);
+                }
             }
 
-            public void PlaySfx(ISfxAudioClipBag bag)
+            public void PlaySfx(ISfxTrigger trigger)
             {
-                var clip = bag.GetAudioClip();
+                switch (trigger)
+                {
+                    case null:
+                        return;
+                    case ISfxAudioClipBag bag:
+                    {
+                        if (_clipBags == null || !_clipBags.Any())
+                        {
+                            PlaySfxFromBag(bag);
+                        }
+                        return;
+                    }
+                    default:
+                        PlaySfxFromTrigger(trigger.Tag);
+                        return;
+                }
+            }
+
+            private void PlaySfxFromBag(ISfxAudioClipBag audioClipBag)
+            {
+                var clip = audioClipBag.GetAudioClip();
                 var audioSource = _audioSources.FirstOrDefault(x => x.CanPlay);
                 audioSource?.Play(clip);
             }

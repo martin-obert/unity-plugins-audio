@@ -6,17 +6,17 @@ using Random = UnityEngine.Random;
 namespace Obert.Audio.Runtime
 {
     [CreateAssetMenu(menuName = "Audio/Sfx Audio Clip Bag", fileName = "Sfx Audio Clip Bag", order = 0)]
-    public sealed class SfxAudioClipBag : ScriptableObject, ISfxAudioClipBag
+    public sealed class SfxAudioClipBag : ScriptableObject, ISfxAudioClipBag, ISfxTrigger
     {
         [SerializeField] private AudioClip[] clips;
-        [SerializeField] private string[] tags;
+        [SerializeField, SfxTag] private string tag;
 
         private int _lastSelected;
 
         [SerializeField] private AudioClipSelectionMethod selectionMethod;
 
         private IAudioClip[] _audioClips;
-        private string Tag => SfxTagHelpers.GetTag(tags);
+        public string Tag => tag;
 
         public IAudioClip GetAudioClip()
         {

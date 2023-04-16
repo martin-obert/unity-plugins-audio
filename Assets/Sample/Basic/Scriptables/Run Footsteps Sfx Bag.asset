@@ -18,7 +18,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2e6112d5e5ff9604f8eb679570d8a28a, type: 3}
   - {fileID: 8300000, guid: fbb1949df6689224fa78044dffc423c0, type: 3}
   - {fileID: 8300000, guid: f99e959e02c71ed41b54e513451f6f73, type: 3}
-  tags:
-  - Run
-  - FootSteps
+  tag: Footsteps;Run
   selectionMethod: 1

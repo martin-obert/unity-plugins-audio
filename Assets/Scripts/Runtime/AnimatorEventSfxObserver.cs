@@ -20,15 +20,8 @@ namespace Obert.Audio.Runtime
                 _players = players ?? throw new ArgumentNullException(nameof(players));
             }
 
-            public void ConsumerSfxTrigger(SfxTrigger trigger)
-            {
-                foreach (var player in _players)
-                {
-                    player.PlaySfx(trigger.Tag);
-                }
-            }
 
-            public void PlayBag(ISfxAudioClipBag bag)
+            public void ConsumeTrigger(ISfxTrigger bag)
             {
                 foreach (var player in _players)
                 {
@@ -44,13 +37,15 @@ namespace Obert.Audio.Runtime
 
         public void PlaySfx(Object signal)
         {
+            if (signal == null)
+            {
+                _controller.ConsumeTrigger(null);
+            }
+
             switch (signal)
             {
-                case SfxTrigger trigger:
-                    _controller.ConsumerSfxTrigger(trigger);
-                    break;
-                case ISfxAudioClipBag bag:
-                    _controller.PlayBag(bag);
+                case ISfxTrigger trigger:
+                    _controller.ConsumeTrigger(trigger);
                     break;
             }
         }

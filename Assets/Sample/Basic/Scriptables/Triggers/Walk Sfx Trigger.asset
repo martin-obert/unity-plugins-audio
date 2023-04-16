@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb2c5ebe03e43429b5d765336e76841, type: 3}
   m_Name: Walk Sfx Trigger
   m_EditorClassIdentifier: 
-  tags:
-  - FootSteps
-  - Walk
+  tag: Footsteps;Walk

@@ -1,0 +1,16 @@
+{
+    "name": "Obert.Audio.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:eba8950d2526047409252e28a379b3f1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

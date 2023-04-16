@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cb2c5ebe03e43429b5d765336e76841, type: 3}
-  m_Name: Run Sfx Trigger
+  m_Script: {fileID: 11500000, guid: 6047c15dfb844dd39872621191ad50a7, type: 3}
+  m_Name: SfxTagProvider
   m_EditorClassIdentifier: 
-  tag: Footsteps;Run
+  availableTags:
+  - Footsteps
+  - Run
+  - Walk

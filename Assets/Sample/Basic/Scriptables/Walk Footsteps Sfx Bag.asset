@@ -18,7 +18,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 013e13d451714e09b6a6c80353c29b02, type: 3}
   - {fileID: 8300000, guid: d5e764cee2174e1eb7fbfb506aab4b21, type: 3}
   - {fileID: 8300000, guid: 59b42685cd0941d398e6e3bc4a87faa7, type: 3}
-  tags:
-  - Walk
-  - FootSteps
+  tag: Footsteps;Walk
   selectionMethod: 1

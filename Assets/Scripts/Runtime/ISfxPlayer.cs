@@ -2,7 +2,6 @@
 {
     public interface ISfxPlayer
     {
-        void PlaySfx(string tag);
-        void PlaySfx(ISfxAudioClipBag bag);
+        void PlaySfx(ISfxTrigger trigger);
     }
 }
