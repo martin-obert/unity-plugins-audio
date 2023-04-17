@@ -25,15 +25,15 @@ namespace Editor
         {
             private const string ResourceFolder = "Resources";
 
-            public void RenderHeader(Vector2 maxTextSize, Rect bounds, SerializedProperty property, string tag, ref float offset)
+            public void RenderHeader(Vector2 maxTextSize, Rect bounds, SerializedProperty property, string tag,
+                ref float offset)
             {
-               
                 EditorGUI.LabelField(new Rect(bounds.x, bounds.y + offset, bounds.width, maxTextSize.y), "SFX Tags");
                 offset += maxTextSize.y;
-                
+
                 EditorGUI.LabelField(new Rect(bounds.x, bounds.y + offset, bounds.width, maxTextSize.y), tag);
                 offset += maxTextSize.y;
-                
+
                 if (SfxTagProvider.Instance == null)
                 {
                     if (GUI.Button(new Rect(bounds) { y = bounds.y + offset, height = maxTextSize.y },
@@ -52,7 +52,7 @@ namespace Editor
                     {
                         SfxTagProviderEditor.lastAsset = property.serializedObject.targetObject;
                         Selection.activeObject = SfxTagProvider.Instance as SfxTagProvider;
-                        EditorUtility.FocusProjectWindow(); 
+                        EditorUtility.FocusProjectWindow();
                     }
                 }
 
@@ -160,7 +160,8 @@ namespace Editor
             var offset = 0f;
             _renderContext.RenderHeader(maxTextSize, position, property, SfxTagHelpers.GetTag(currentTags), ref offset);
             allTags = _renderContext.FilterTags(maxTextSize, position, ref _currentFilter, allTags, ref offset);
-            _renderContext.RenderCheckboxes(maxTextSize, position, currentTags, allTags, ref offset, property);
+            _renderContext.RenderCheckboxes(maxTextSize, position, currentTags, allTags.OrderTags().ToArray(),
+                ref offset, property);
             _height = offset;
         }
     }

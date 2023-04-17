@@ -7,7 +7,7 @@ namespace Obert.Audio.Runtime
 {
     public static class SfxTagHelpers
     {
-        public static string GetTag(IEnumerable<string> fragments) => string.Join(";", fragments.OrderBy(x => x));
+        public static string GetTag(IEnumerable<string> fragments) => string.Join(";", OrderTags(fragments));
 
         public static string[] GetTagValues(string value)
         {

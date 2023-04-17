@@ -3,6 +3,7 @@
     public interface ISfxAudioClipBag
     {
         IAudioClip GetAudioClip();
-        bool HasTag(string tag);
+        bool TagEquals(string sfxTag);
+        bool HasTag(string value);
     }
 }

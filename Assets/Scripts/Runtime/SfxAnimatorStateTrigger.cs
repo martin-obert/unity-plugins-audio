@@ -7,7 +7,7 @@ namespace Obert.Audio.Runtime
 {
     public sealed class SfxAnimatorStateTrigger : StateMachineBehaviour
     {
-        [SerializeField,SfxTag] private string tag;
+        [SerializeField, SfxTag] private string tag;
         [SerializeField] private SfxAudioClipBag bag;
 
         private class AnimatorStateTrigger : ISfxTrigger

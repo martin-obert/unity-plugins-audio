@@ -14,7 +14,6 @@ namespace Editor
             {
                 Selection.activeObject = lastAsset;
                 EditorUtility.FocusProjectWindow();
-                Selection.activeObject = null;
             }
             base.OnInspectorGUI();
         }

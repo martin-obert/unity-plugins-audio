@@ -9,7 +9,7 @@ namespace Obert.Audio.Runtime
     {
         [SerializeField] private SfxAudioClipBag[] audioClipBags;
 
-        private ISfxPlayer _controller;
+        private IFilteredSfxPlayer _controller;
 
         private void Awake()
         {
@@ -19,10 +19,11 @@ namespace Obert.Audio.Runtime
             _controller = new Controller(AudioSources, sfxAudioClipBags);
         }
 
-        private sealed class Controller : ISfxPlayer
+        private sealed class Controller : IFilteredSfxPlayer
         {
             private readonly IAudioSource[] _audioSources;
             private readonly ISfxAudioClipBag[] _clipBags;
+            public ISfxFilter Filter { get; } = new SfxFilter();
 
             public Controller(IAudioSource[] audioSources, ISfxAudioClipBag[] clipBags)
             {
@@ -37,8 +38,8 @@ namespace Obert.Audio.Runtime
                     return;
                 }
 
-                var clipBags = _clipBags
-                    .Where(x => x.HasTag(tag)).ToArray();
+
+                var clipBags = Filter.Filter(_clipBags, tag);
 
                 foreach (var bag in clipBags)
                 {
@@ -58,6 +59,7 @@ namespace Obert.Audio.Runtime
                         {
                             PlaySfxFromBag(bag);
                         }
+
                         return;
                     }
                     default:
@@ -65,6 +67,7 @@ namespace Obert.Audio.Runtime
                         return;
                 }
             }
+
 
             private void PlaySfxFromBag(ISfxAudioClipBag audioClipBag)
             {
@@ -75,5 +78,25 @@ namespace Obert.Audio.Runtime
         }
 
         public override ISfxPlayer InternalController => _controller;
+
+        public void AddRequiredTag(string value)
+        {
+            _controller.Filter.AddRequiredTag(value);
+        }
+
+        public void RemoveRequiredTag(string value)
+        {
+            _controller.Filter.RemoveRequiredTag(value);
+        }
+
+        public void AddOptionalTag(string value)
+        {
+            _controller.Filter.AddOptionalTag(value);
+        }
+
+        public void RemoveOptionalTag(string value)
+        {
+            _controller.Filter.RemoveOptionalTag(value);
+        }
     }
 }

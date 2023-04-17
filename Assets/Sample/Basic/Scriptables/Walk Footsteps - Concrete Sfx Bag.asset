@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b16e125c09b415bac46eed06be32fce, type: 3}
-  m_Name: Walk Footsteps Sfx Bag
+  m_Name: Walk Footsteps - Concrete Sfx Bag
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 92ccc9ed382340b3a6a30d825228a330, type: 3}
@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 013e13d451714e09b6a6c80353c29b02, type: 3}
   - {fileID: 8300000, guid: d5e764cee2174e1eb7fbfb506aab4b21, type: 3}
   - {fileID: 8300000, guid: 59b42685cd0941d398e6e3bc4a87faa7, type: 3}
-  tag: Footsteps;Walk
+  tag: Concrete;Footsteps;Walk
   selectionMethod: 1

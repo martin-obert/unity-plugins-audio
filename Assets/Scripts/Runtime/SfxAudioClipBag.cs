@@ -46,6 +46,7 @@ namespace Obert.Audio.Runtime
             }
         }
 
-        public bool HasTag(string tag) => Tag.Equals(tag, StringComparison.InvariantCultureIgnoreCase);
+        public bool TagEquals(string sfxTag) => Tag.Equals(sfxTag, StringComparison.InvariantCultureIgnoreCase);
+        public bool HasTag(string value) => Tag.Contains(value, StringComparison.InvariantCultureIgnoreCase);
     }
 }
