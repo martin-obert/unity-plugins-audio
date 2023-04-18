@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b16e125c09b415bac46eed06be32fce, type: 3}
+  m_Name: Auto Rifle Dry
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 1ff46d1f5bcbb654b883bd16dad8c195, type: 3}
+  - {fileID: 8300000, guid: b6bcc3074caecc345880ca65de0c3a5f, type: 3}
+  - {fileID: 8300000, guid: aed1acb78152fff40ad9166afbdc209c, type: 3}
+  - {fileID: 8300000, guid: 75cbdd0afa624754d8c86f0e3d991409, type: 3}
+  tag: 
+  selectionMethod: 0

@@ -74,7 +74,6 @@ namespace Obert.Audio.Runtime
 
         private void OnDestroy()
         {
-            Debug.Log("Destroyed");
             _players = null;
         }
     }

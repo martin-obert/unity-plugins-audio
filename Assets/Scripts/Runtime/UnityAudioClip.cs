@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Obert.Audio.Runtime
 {
-    public sealed class UnityAudioClip : IAudioClip
+    public sealed class UnityAudioClip : IAudioClip, ISfxTrigger
     {
         public UnityAudioClip(AudioClip audioClip)
         {
@@ -11,5 +11,7 @@ namespace Obert.Audio.Runtime
         }
 
         public AudioClip AudioClip { get; }
+        
+        public string Tag => AudioClip.name;
     }
 }

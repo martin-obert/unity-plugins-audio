@@ -62,10 +62,21 @@ namespace Obert.Audio.Runtime
 
                         return;
                     }
+                    case IAudioClip clip:
+                    {
+                        PlaySfxFromClip(clip);
+                        return;
+                    }
                     default:
                         PlaySfxFromTrigger(trigger.Tag);
                         return;
                 }
+            }
+
+            private void PlaySfxFromClip(IAudioClip audioClip)
+            {
+                var audioSource = _audioSources.FirstOrDefault(x => x.CanPlay);
+                audioSource?.Play(audioClip);
             }
 
 
