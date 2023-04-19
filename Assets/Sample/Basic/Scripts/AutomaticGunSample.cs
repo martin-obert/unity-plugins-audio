@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Obert.Audio.Runtime;
 using UnityEngine;
 
-namespace Obert.Audio.Runtime
+namespace Sample.Basic.Scripts
 {
     public sealed class AutomaticGunSample : MonoBehaviour
     {

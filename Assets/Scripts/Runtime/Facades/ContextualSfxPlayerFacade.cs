@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Linq;
+using Obert.Audio.Runtime.Abstractions;
+using Obert.Audio.Runtime.ScriptableObjects;
+using Obert.Audio.Runtime.Services;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.Facades
 {
+    /// <summary>
+    /// Extends <see cref="SimpleSfxPlayerFacade"/> and <see cref="StaticBagSfxPlayerFacade"/> for playing SFX from tag.
+    /// Contains methods for tag filtering manipulation <see cref="ISfxFilter"/>
+    /// </summary>
     public sealed class ContextualSfxPlayerFacade : SfxPlayerFacade
     {
         [SerializeField] private SfxAudioClipBag[] audioClipBags;
@@ -39,21 +46,25 @@ namespace Obert.Audio.Runtime
 
         public override ISfxPlayer InternalController => _controller;
 
+        /// <inheritdoc cref="ISfxFilter.AddRequiredTag"/>
         public void AddRequiredTag(string value)
         {
             _controller.Filter.AddRequiredTag(value);
         }
 
+        /// <inheritdoc cref="ISfxFilter.RemoveRequiredTag"/>
         public void RemoveRequiredTag(string value)
         {
             _controller.Filter.RemoveRequiredTag(value);
         }
 
+        /// <inheritdoc cref="ISfxFilter.AddOptionalTag"/>
         public void AddOptionalTag(string value)
         {
             _controller.Filter.AddOptionalTag(value);
         }
 
+        /// <inheritdoc cref="ISfxFilter.RemoveOptionalTag"/>
         public void RemoveOptionalTag(string value)
         {
             _controller.Filter.RemoveOptionalTag(value);

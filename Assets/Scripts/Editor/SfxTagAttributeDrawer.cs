@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Obert.Audio.Runtime;
+using Obert.Audio.Runtime.Data;
 using UnityEditor;
 using UnityEngine;
 

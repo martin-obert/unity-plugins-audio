@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Obert.Audio.Runtime.ScriptableObjects;
 using UnityEngine;
 
 namespace Obert.Audio.Runtime

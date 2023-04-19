@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Obert.Audio.Runtime.Data;
+using UnityEngine;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.ScriptableObjects
 {
 
     public interface ISfxScriptableTrigger : ISfxTrigger

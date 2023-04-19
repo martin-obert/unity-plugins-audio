@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Obert.Audio.Runtime.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "Audio/Sfx Audio Clip Bag", fileName = "Sfx Audio Clip Bag", order = 0)]
     public sealed class SfxAudioClipBag : ScriptableObject, ISfxAudioClipBag, ISfxTrigger

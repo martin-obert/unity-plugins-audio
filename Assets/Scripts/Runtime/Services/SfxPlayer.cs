@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Obert.Audio.Runtime.Abstractions;
 using Obert.Common.Runtime.Extensions;
 
 namespace Obert.Audio.Runtime
@@ -18,7 +19,7 @@ namespace Obert.Audio.Runtime
         public void PlaySfx(ISfxTrigger trigger)
         {
             var clips = GetFromTag(trigger?.Tag);
-            if (clips != null && clips.Length > 0)
+            if (clips is { Length: > 0 })
             {
                 PlayClips(clips);
                 return;

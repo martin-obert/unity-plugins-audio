@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Obert.Common.Runtime.Extensions;
+using Obert.Audio.Runtime.Abstractions;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.Services
 {
-    public interface ISfxFilter
-    {
-        ISfxAudioClipBag[] Filter(ISfxAudioClipBag[] source, string explicitTag = null);
-        void AddOptionalTag(string value);
-        void AddRequiredTag(string value);
-        void RemoveRequiredTag(string value);
-        void RemoveOptionalTag(string value);
-    }
-
     internal class SfxFilter : ISfxFilter
     {
         private readonly HashSet<string> _optionalTags = new();
