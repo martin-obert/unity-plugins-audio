@@ -7,7 +7,7 @@ namespace Obert.Audio.Runtime
 {
     public sealed class AnimatorEventSfxObserver : MonoBehaviour
     {
-        [SerializeField] private SfxPlayer[] players;
+        [SerializeField] private SfxPlayerFacade[] players;
 
         private Controller _controller;
 

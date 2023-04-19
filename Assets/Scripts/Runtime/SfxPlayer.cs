@@ -1,15 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Obert.Common.Runtime.Extensions;
 
 namespace Obert.Audio.Runtime
 {
-    public abstract class SfxPlayer : MonoBehaviour
+    public class SfxPlayer : ISfxPlayer
     {
-        [SerializeField] private AudioSource[] audioSources;
+        private readonly IAudioSource[] _sources;
 
-        protected IAudioSource[] AudioSources =>
-            audioSources.Select(x => new UnityAudioSource(x)).OfType<IAudioSource>().ToArray();
+        public SfxPlayer(IAudioSource[] sources)
+        {
+            sources.ThrowIfEmptyOrNull();
+            _sources = sources;
+        }
 
-        public abstract ISfxPlayer InternalController { get;  }
+        public void PlaySfx(ISfxTrigger trigger)
+        {
+            var clips = GetFromTag(trigger?.Tag);
+            if (clips != null && clips.Length > 0)
+            {
+                PlayClips(clips);
+                return;
+            }
+            
+            var clip = GetClip(trigger);
+            PlayClip(clip);
+        }
+
+        protected virtual IAudioClip GetClip(ISfxTrigger trigger)
+        {
+            if (trigger == null) return null;
+
+            return trigger switch
+            {
+                IAudioClip clip => clip,
+                ISfxAudioClipBag bag => GetAudioClipFromBag(bag),
+                ISfxAnimatorStateTrigger stateTrigger =>
+                    stateTrigger.AudioClip ?? GetAudioClipFromBag(stateTrigger.Bag),
+                _ => throw new NotSupportedException(
+                    $"Unable to play from trigger of type: {trigger.GetType()}, {trigger}")
+            };
+        }
+
+        protected virtual IAudioClip[] GetFromTag(string tag)
+        {
+            return null;
+        }
+
+        protected virtual IAudioClip GetAudioClipFromBag(ISfxAudioClipBag bag)
+        {
+            return bag.GetAudioClip();
+        }
+
+        private void PlayClips(IEnumerable<IAudioClip> clips)
+        {
+            foreach (var clip in clips)
+            {
+                if (clip == null) continue;
+                PlayClip(clip);
+            }
+        }
+        
+        private void PlayClip(IAudioClip clip)
+        {
+            if (clip == null) throw new ArgumentNullException(nameof(clip));
+
+            _sources.FirstOrDefault(x => x.CanPlay)?.Play(clip);
+        }
     }
 }

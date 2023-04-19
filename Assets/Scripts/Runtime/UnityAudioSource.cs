@@ -12,7 +12,8 @@ namespace Obert.Audio.Runtime
             _audioSource = audioSource ? audioSource : throw new ArgumentNullException(nameof(audioSource));
         }
 
-        public bool CanPlay => !_audioSource.isPlaying;
+        public bool CanPlay =>
+            _audioSource.enabled && _audioSource.gameObject.activeInHierarchy && !_audioSource.isPlaying;
 
         public void Play(IAudioClip clip)
         {

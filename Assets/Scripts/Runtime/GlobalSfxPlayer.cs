@@ -9,7 +9,7 @@ namespace Obert.Audio.Runtime
     /// </summary>
     public sealed class GlobalSfxPlayer : MonoBehaviour
     {
-        [SerializeField] private SfxPlayer player;
+        [SerializeField] private SfxPlayerFacade playerFacade;
 
         public sealed class Controller : ISfxPlayer
         {
@@ -33,11 +33,11 @@ namespace Obert.Audio.Runtime
 
         private void Start()
         {
-            if (player != null)
+            if (playerFacade != null)
             {
                 if (Instance == null)
                 {
-                    Instance = new Controller(player.InternalController);
+                    Instance = new Controller(playerFacade.InternalController);
                     DontDestroyOnLoad(gameObject);
                 }
                 else

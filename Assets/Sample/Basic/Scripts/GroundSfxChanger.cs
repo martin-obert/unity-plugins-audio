@@ -7,12 +7,12 @@ namespace Sample.Basic.Scripts
 {
     public sealed class GroundSfxChanger : MonoBehaviour
     {
-        [SerializeField] private ContextualSfxPlayer contextualSfxPlayer;
+        [SerializeField] private ContextualSfxPlayerFacade contextualSfxPlayerFacade;
         private string _currentTerrain;
 
         private void Awake()
         {
-            Assert.IsNotNull(contextualSfxPlayer, "contextualSfxPlayer != null");
+            Assert.IsNotNull(contextualSfxPlayerFacade, "contextualSfxPlayer != null");
         }
 
         private void OnCollisionEnter(Collision other)
@@ -21,9 +21,9 @@ namespace Sample.Basic.Scripts
             if (otherGameObject == null || string.IsNullOrWhiteSpace(otherGameObject.SfxTag)) return;
 
             if (!string.IsNullOrWhiteSpace(_currentTerrain))
-                contextualSfxPlayer.RemoveRequiredTag(_currentTerrain);
+                contextualSfxPlayerFacade.RemoveRequiredTag(_currentTerrain);
             
-            contextualSfxPlayer.AddRequiredTag(otherGameObject.SfxTag);
+            contextualSfxPlayerFacade.AddRequiredTag(otherGameObject.SfxTag);
             _currentTerrain = otherGameObject.SfxTag;
         }
     }

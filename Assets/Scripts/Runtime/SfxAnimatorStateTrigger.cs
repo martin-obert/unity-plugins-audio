@@ -5,24 +5,18 @@ using UnityEngine.Animations;
 
 namespace Obert.Audio.Runtime
 {
-    public sealed class SfxAnimatorStateTrigger : StateMachineBehaviour
+    public sealed class SfxAnimatorStateTrigger : StateMachineBehaviour, ISfxAnimatorStateTrigger
     {
         [SerializeField, SfxTag] private string tag;
         [SerializeField] private SfxAudioClipBag bag;
+        [SerializeField] private AudioClip audioClip;
 
-        private class AnimatorStateTrigger : ISfxTrigger
-        {
-            public AnimatorStateTrigger(string tag)
-            {
-                Tag = tag;
-            }
-
-            public string Tag { get; }
-        }
-        
         private ISfxPlayer[] _players;
 
-        
+        public string Tag => tag;
+        public ISfxAudioClipBag Bag => bag;
+        public IAudioClip AudioClip => new UnityAudioClip(audioClip);
+
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex,
             AnimatorControllerPlayable controller)
         {
@@ -35,24 +29,7 @@ namespace Obert.Audio.Runtime
         {
             foreach (var player in _players)
             {
-                var hasTag = !string.IsNullOrWhiteSpace(tag);
-                var hasBag = bag != null;
-                
-                if (!hasBag && !hasTag)
-                {
-                    player.PlaySfx(null);
-                    return;
-                }
-
-                if (hasBag)
-                {
-                    player.PlaySfx(bag);
-                }
-
-                if (hasTag)
-                {
-                    player.PlaySfx(new AnimatorStateTrigger(tag));
-                }
+                player.PlaySfx(this);
             }
         }
 
@@ -62,7 +39,7 @@ namespace Obert.Audio.Runtime
 
             var players = animator.gameObject
                 .GetComponents<Component>()
-                .OfType<SfxPlayer>()
+                .OfType<SfxPlayerFacade>()
                 .Select(x => x.InternalController)
                 .ToArray();
 

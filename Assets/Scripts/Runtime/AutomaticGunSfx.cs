@@ -27,7 +27,7 @@ namespace Obert.Audio.Runtime
         public void LoadMag() => Play(magLoadBag.GetAudioClip());
         public void CockRifle() => Play(cockBag.GetAudioClip());
         public void SafetySwitch() => Play(safetySwitch.GetAudioClip());
-        
+
         private void Play(AudioClip clip)
         {
             var source = sources.FirstOrDefault(x => !x.isPlaying);
@@ -105,6 +105,7 @@ namespace Obert.Audio.Runtime
                 Debug.Log("Tail Only Sound");
                 Play(tailSound);
             }
+
             _isTriggerHeld = false;
         }
     }
