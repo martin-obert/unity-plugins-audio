@@ -41,12 +41,23 @@ namespace Obert.Audio.Runtime
                     }
                 }
 
+                if (trigger is UnityAudioClip clip)
+                {
+                    PlayClip(clip);
+                    return;
+                }
+                
                 PlaySfx(_clipBag);
             }
 
             private void PlaySfx(ISfxAudioClipBag bag)
             {
                 var clip = bag.GetAudioClip();
+                PlayClip(clip);
+            }
+
+            private void PlayClip(IAudioClip clip)
+            {
                 var source = _audioSources.FirstOrDefault(x => x.CanPlay);
                 source?.Play(clip);
             }
