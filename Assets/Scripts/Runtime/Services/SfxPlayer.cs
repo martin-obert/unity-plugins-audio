@@ -4,7 +4,7 @@ using System.Linq;
 using Obert.Audio.Runtime.Abstractions;
 using Obert.Common.Runtime.Extensions;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.Services
 {
     public class SfxPlayer : ISfxPlayer
     {

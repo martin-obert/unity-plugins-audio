@@ -4,7 +4,7 @@ using Obert.Audio.Runtime.Abstractions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.Triggers
 {
     public sealed class AnimatorEventSfxObserver : MonoBehaviour
     {

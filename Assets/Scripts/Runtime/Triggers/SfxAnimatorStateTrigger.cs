@@ -6,7 +6,7 @@ using Obert.Audio.Runtime.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Animations;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.Triggers
 {
     public sealed class SfxAnimatorStateTrigger : StateMachineBehaviour, ISfxAnimatorStateTrigger
     {

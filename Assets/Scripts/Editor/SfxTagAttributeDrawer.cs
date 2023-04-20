@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Obert.Audio.Runtime;
 using Obert.Audio.Runtime.Data;
+using Obert.Audio.Runtime.ScriptableObjects;
+using Obert.Audio.Runtime.Services;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,6 +31,12 @@ namespace Editor
             public void RenderHeader(Vector2 maxTextSize, Rect bounds, SerializedProperty property, string tag,
                 ref float offset)
             {
+                if (GUI.Button(new Rect(bounds.width - 60, bounds.y, 60, 15), "Clear"))
+                {
+                    property.stringValue = string.Empty;
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+
                 EditorGUI.LabelField(new Rect(bounds.x, bounds.y + offset, bounds.width, maxTextSize.y), "SFX Tags");
                 offset += maxTextSize.y;
 

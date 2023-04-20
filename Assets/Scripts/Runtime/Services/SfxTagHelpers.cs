@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Obert.Common.Runtime.Extensions;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.Services
 {
     public static class SfxTagHelpers
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Obert.Audio.Runtime
+namespace Obert.Audio.Runtime.ScriptableObjects
 {
     public sealed class SfxTagProvider : ScriptableObject, ISfxTagProvider
     {
