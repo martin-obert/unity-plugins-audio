@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Sample/Basic/Scenes/02 Footsteps - Different Grounds.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Sample/Basic/Scenes/01 Basic Usage.unity
+    guid: b196fb8d238b9414ea9e9a5469ce1ae2
   m_configObjects: {}

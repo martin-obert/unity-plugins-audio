@@ -61,16 +61,16 @@ ModelImporter:
       curves: []
       events:
       - time: 0.3007519
-        functionName: Sfx
+        functionName: PlaySfx
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 7bc9647d88574ee4388db62dbf3b21b0, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: 057092755b889874ab15a8336de71894, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8082707
-        functionName: Sfx
+        functionName: PlaySfx
         data: 
-        objectReferenceParameter: {fileID: 11400000, guid: 7bc9647d88574ee4388db62dbf3b21b0, type: 2}
+        objectReferenceParameter: {fileID: 11400000, guid: 057092755b889874ab15a8336de71894, type: 2}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

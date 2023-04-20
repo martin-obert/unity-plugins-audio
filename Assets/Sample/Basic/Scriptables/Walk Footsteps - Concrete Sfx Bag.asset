@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b16e125c09b415bac46eed06be32fce, type: 3}
+  m_Name: Walk Footsteps - Concrete Sfx Bag
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 92ccc9ed382340b3a6a30d825228a330, type: 3}
+  - {fileID: 8300000, guid: 7b9fff50672e4260b1622d65cdfc42b3, type: 3}
+  - {fileID: 8300000, guid: 013e13d451714e09b6a6c80353c29b02, type: 3}
+  - {fileID: 8300000, guid: d5e764cee2174e1eb7fbfb506aab4b21, type: 3}
+  - {fileID: 8300000, guid: 59b42685cd0941d398e6e3bc4a87faa7, type: 3}
+  tag: Concrete;Footsteps;Walk
+  selectionMethod: 1
