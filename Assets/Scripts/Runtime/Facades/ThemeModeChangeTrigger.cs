@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Obert.Audio.Runtime.Data;
+using UnityEngine;
 
-namespace Obert.Audio.Runtime.Abstractions
+namespace Obert.Audio.Runtime.Facades
 {
     public class ThemeModeChangeTrigger : MonoBehaviour
     {

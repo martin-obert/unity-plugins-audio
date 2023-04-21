@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using Obert.Audio.Runtime.Abstractions;
+using Obert.Audio.Runtime.Data;
 using UnityEngine;
 
-namespace Obert.Audio.Runtime.Abstractions
+namespace Obert.Audio.Runtime.Services
 {
     [Serializable]
     public sealed class AudioClipProvider : IAudioClipProvider

@@ -1,9 +1,9 @@
 ﻿using System;
-using Obert.Audio.Runtime.Data;
+using Obert.Audio.Runtime.Abstractions;
 using Obert.Audio.Runtime.Facades;
 using UnityEngine;
 
-namespace Obert.Audio.Runtime.Abstractions
+namespace Obert.Audio.Runtime.Data
 {
     [Serializable]
     public sealed class UnityAmbientAudioClipMetadata : IAmbientAudioClipMetadata

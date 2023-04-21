@@ -1,4 +1,4 @@
-﻿namespace Obert.Audio.Runtime.Abstractions
+﻿namespace Obert.Audio.Runtime.Data
 {
     public enum MoodBlendType
     {
