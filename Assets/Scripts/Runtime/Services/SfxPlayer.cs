@@ -24,9 +24,10 @@ namespace Obert.Audio.Runtime.Services
                 PlayClips(clips);
                 return;
             }
-            
+
             var clip = GetClip(trigger);
-            PlayClip(clip);
+            if (clip != null)
+                PlayClip(clip);
         }
 
         protected virtual IAudioClip GetClip(ISfxTrigger trigger)
@@ -62,7 +63,7 @@ namespace Obert.Audio.Runtime.Services
                 PlayClip(clip);
             }
         }
-        
+
         private void PlayClip(IAudioClip clip)
         {
             if (clip == null) throw new ArgumentNullException(nameof(clip));
