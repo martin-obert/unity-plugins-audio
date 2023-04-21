@@ -4,13 +4,18 @@ namespace Obert.Audio.Runtime.Abstractions
 {
     public interface IAudioSource
     {
+        float TotalLength { get; }
         bool CanPlay { get; }
         AudioClip Clip { get; set; }
-        float CurrentTime { get; }
+        float CurrentTime { get; set; }
         float Volume { get; set; }
+        float InitialVolume { get; }
         bool IsPlaying { get; }
-        void Play(IAudioClip clip, float timePosition = 0, bool? isLooped = null);
+        bool IsLooped { get; }
+        void PlayOneShot(IAudioClip clip);
         void Stop();
-        void Play(AudioClip clip, float timePosition, bool? isLooped = null);
+        void PlayOneShot(AudioClip clip);
+        void Play(ulong? delay = null);
+        void Pause();
     }
 }

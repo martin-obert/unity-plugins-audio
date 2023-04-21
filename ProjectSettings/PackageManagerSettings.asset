@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Capabilities: 7
   - m_Id: scoped:Obert
     m_Name: Obert
-    m_Url: http://34.159.136.206
+    m_Url: http://upm.obert.cz
     m_Scopes:
     - com.obert
     m_IsDefault: 0
