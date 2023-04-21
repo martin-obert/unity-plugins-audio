@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - main
-    
+
+permissions:
+  contents: write
+  pull-requests: write
+
 defaults:
   run:
     working-directory: Assets/Scripts
@@ -14,8 +18,8 @@ jobs:
     environment: prod
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
       - uses: google-github-actions/release-please-action@v3
