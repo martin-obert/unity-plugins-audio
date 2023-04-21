@@ -1,7 +1,8 @@
 ﻿using System;
+using Obert.Audio.Runtime.Abstractions;
 using UnityEngine;
 
-namespace Obert.Audio.Runtime.Abstractions
+namespace Obert.Audio.Runtime.Data
 {
     [Serializable]
     public sealed class ThemeMood
