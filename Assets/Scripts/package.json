@@ -8,6 +8,10 @@
   "documentationUrl": "https://github.com/martin-obert/unity-plugins-audio",
   "changelogUrl": "https://github.com/martin-obert/unity-plugins-audio",
   "licensesUrl": "https://github.com/martin-obert/unity-plugins-audio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-obert/unity-plugins-audio.git"
+  },
   "keywords": [
     "obert",
     "audio",
@@ -19,7 +23,7 @@
     "url": "https://github.com/martin-obert"
   },
   "dependencies": {
-    "com.obert.common": "0.1.0"
+    "com.obert.common": "1.13.0"
   },
   "samples": [
     {
