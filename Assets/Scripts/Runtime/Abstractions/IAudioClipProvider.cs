@@ -2,6 +2,6 @@
 {
     public interface IAudioClipProvider
     {
-        IAudioClip ProvideClipContainingTag(string audioTag);
+        IAudioSource[] ProvideClipContainingTag(string audioTag);
     }
 }

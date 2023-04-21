@@ -9,11 +9,11 @@ namespace Obert.Audio.Runtime.Abstractions
     {
         [SerializeField] private UnityAmbientAudioClipMetadata[] clips;
 
-        public IAudioClip ProvideClipContainingTag(string audioTag)
+        public IAudioSource[] ProvideClipContainingTag(string audioTag)
         {
-            var clipMetadata = clips.FirstOrDefault(x => x.Tag.Equals(audioTag));
+            var clipMetadata = clips.Where(x => x.Tag.Equals(audioTag));
             
-            return clipMetadata == null ? null : new UnityAudioClip(clipMetadata.AudioClip);
+            return clipMetadata.Select(x=>x.AudioSource).ToArray();
         }
     }
 }

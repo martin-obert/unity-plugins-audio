@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sample/Basic/Scriptables/Run Footsteps - Grass Sfx Bag.asset.meta
 guid: 8dd9cbbe040edf34b927c74b4df456be
+=======
+guid: 5fa62005ddac68440aa977e167673a79
+>>>>>>> main:Assets/Sample/Basic/Scriptables/Hurt Emotions Sfx Bag.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

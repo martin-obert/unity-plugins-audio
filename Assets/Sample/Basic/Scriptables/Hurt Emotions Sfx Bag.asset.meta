@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sample/Basic/Scriptables/Hurt Emotions Sfx Bag.asset.meta
 guid: 5fa62005ddac68440aa977e167673a79
+=======
+guid: 0464517eadfda45419d86ec2481ad972
+>>>>>>> main:Assets/Auto Rifle Shoot.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

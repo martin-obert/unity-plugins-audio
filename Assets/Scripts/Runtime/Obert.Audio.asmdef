@@ -2,7 +2,8 @@
     "name": "Obert.Audio",
     "rootNamespace": "Obert.Audio",
     "references": [
-        "GUID:38636a0982891e0469cb8fdd3564d3a9"
+        "GUID:38636a0982891e0469cb8fdd3564d3a9",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

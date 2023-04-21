@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sample/Basic/Scriptables/Run Footsteps - Concrete Sfx Bag.asset.meta
 guid: 52e4b9e8b3be1324995d2209f2d9095e
+=======
+guid: 3e40f768d6fe76d41b88c02209fb8692
+>>>>>>> main:Assets/Resources/SfxTagProvider.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

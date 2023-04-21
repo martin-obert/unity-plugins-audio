@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Obert.Audio.Runtime.Data;
 using Obert.Audio.Runtime.Facades;
 using Obert.Audio.Runtime.Services;
+using Obert.Common.Runtime.Extensions;
 using UnityEngine;
 
 namespace Obert.Audio.Runtime.Abstractions
 {
     public class ThemeAudioPlayerFacade : MonoBehaviour
     {
-        [SerializeField] private AudioClipProvider clipProvider;
+        [SerializeField] private AudioSourceProvider sourceProvider;
         [SerializeField, SfxTag] private string defaultTag;
         [SerializeField] private float defaultValue;
-        [SerializeField] private AudioSource mainAudioSource;
-        [SerializeField] private AudioSource blendAudioSource;
 
         private static IThemeAudioPlayer _instance;
 
@@ -30,8 +28,7 @@ namespace Obert.Audio.Runtime.Abstractions
                 return;
             }
 
-            _instance = new ThemeAudioPlayer(clipProvider, new UnityAudioSource(mainAudioSource),
-                new UnityAudioSource(blendAudioSource), defaultTag, defaultValue);
+            _instance = new ThemeAudioPlayer(sourceProvider, defaultTag, defaultValue);
             _onDispose = () =>
             {
                 _instance?.Dispose();
@@ -57,56 +54,66 @@ namespace Obert.Audio.Runtime.Abstractions
 
         private sealed class ThemeAudioPlayer : IThemeAudioPlayer
         {
-            private readonly IAudioClipProvider _clipProvider;
-
-            private readonly IAudioSource _mainAudioSource;
-            private readonly IAudioSource _blendAudioSource;
+            private readonly IAudioSourceProvider _sourceProvider;
+            private IAudioSource _mainAudioSource;
+            private IAudioSource _blendAudioSource;
 
             private readonly IDictionary<string, float> _weightedTags = new Dictionary<string, float>();
             private readonly string _defaultTag;
             private readonly float _defaultWeight;
-            private readonly IList<AudioClipPlayState> _playStates = new Collection<AudioClipPlayState>();
-            private float progress = 0;
-            public bool IsComplete => _animationCurve == null || progress >= 1;
+            private float _progress = 0;
+            private float _progressMax = 0;
+            public bool IsComplete => _animationCurve == null || _progress >= _progressMax;
             private AnimationCurve _animationCurve;
 
             public void Update(float deltaTime)
             {
+                CheckNextClip();
                 if (IsComplete)
                 {
+                    if (_blendAudioSource is { IsPlaying: true })
+                    {
+                        _blendAudioSource.Pause();
+                    }
+
                     _animationCurve = null;
                     return;
                 }
 
-                _mainAudioSource.Volume = _animationCurve.Evaluate(progress);
+                _progress = Mathf.Clamp(_progress + deltaTime, 0, _progressMax);
+
+                _mainAudioSource.Volume = Mathf.Min(_mainAudioSource.InitialVolume,
+                    _mainAudioSource.InitialVolume * _animationCurve.Evaluate(_progress));
 
                 if (_blendAudioSource.IsPlaying)
-                    _blendAudioSource.Volume = _animationCurve.Evaluate(1 - progress);
-                progress = Mathf.Clamp01(progress + deltaTime);
-                if (IsComplete)
-                {
-                    SaveCurrentClipState(_blendAudioSource);
-                    _blendAudioSource.Stop();
-                    _blendAudioSource.Clip = null;
-                }
+                    _blendAudioSource.Volume = Mathf.Min(_blendAudioSource.InitialVolume,
+                        _blendAudioSource.InitialVolume * _animationCurve.Evaluate(_progressMax - _progress));
+            }
+
+            private void CheckNextClip()
+            {
+                if (!_mainAudioSource.IsPlaying || _mainAudioSource.IsLooped) return;
+
+                if (_mainAudioSource.CurrentTime + .5f < _mainAudioSource.TotalLength)
+                    return;
+
+                Debug.Log("Clip is ending and no loop is set, so picking next audio");
+                ContinueTheme();
             }
 
             private void SetBlend(AnimationCurve curve)
             {
                 _animationCurve = curve;
-                progress = 0;
+                _progress = 0;
+                _progressMax = curve.keys.Max(x => x.time);
             }
 
             public ThemeAudioPlayer(
-                IAudioClipProvider clipProvider,
-                IAudioSource mainAudioSource,
-                IAudioSource blendAudioSource,
+                IAudioSourceProvider sourceProvider,
                 string defaultTag,
                 float defaultWeight)
             {
-                _mainAudioSource = mainAudioSource ?? throw new ArgumentNullException(nameof(mainAudioSource));
-                _blendAudioSource = blendAudioSource ?? throw new ArgumentNullException(nameof(blendAudioSource));
-                _clipProvider = clipProvider ?? throw new ArgumentNullException(nameof(clipProvider));
+                _sourceProvider = sourceProvider ?? throw new ArgumentNullException(nameof(sourceProvider));
                 _defaultTag = defaultTag;
                 _defaultWeight = defaultWeight;
                 Reset();
@@ -116,10 +123,12 @@ namespace Obert.Audio.Runtime.Abstractions
             public void Reset()
             {
                 _weightedTags.Clear();
-                if (!string.IsNullOrWhiteSpace(_defaultTag))
-                {
-                    PlayClipByTag(_defaultTag, _defaultWeight);
-                }
+
+                if (string.IsNullOrWhiteSpace(_defaultTag)) return;
+
+                _weightedTags.Add(_defaultTag, _defaultWeight);
+
+                PlayClipByTag(_defaultTag, _defaultWeight);
             }
 
             public void ApplyMood(ThemeMood value)
@@ -133,58 +142,92 @@ namespace Obert.Audio.Runtime.Abstractions
                 PlayClipByTag(key, weightAmount, value);
             }
 
-            private void PlayClipByTag(string key, float weightAmount, ThemeMood themeMood = null)
+            private void ContinueTheme(ThemeMood themeMood = null)
             {
+                var (key, weightAmount) = _weightedTags.OrderByDescending(x => x.Value).FirstOrDefault();
                 if (string.IsNullOrWhiteSpace(key)) return;
 
-                Debug.Log($"Selecting clip with tag: {key}, weight: {weightAmount}");
-
-                if (_clipProvider.ProvideClipContainingTag(key) is not UnityAudioClip clip)
+                Debug.Log($"Selecting audio source with tag: {key}, weight: {weightAmount}");
+                var audioSources = _sourceProvider.ProvideClipContainingTag(key);
+                if (audioSources.IsNullOrEmpty())
                 {
-                    Debug.Log("No clip found");
+                    Debug.Log($"No audio source found for tag: {key}");
                     return;
                 }
 
-                var audioClip = clip.AudioClip;
-
-                Debug.Log($"Selected clip: {audioClip}");
-
-                if (audioClip == _mainAudioSource.Clip)
+                var audioSource = audioSources.FirstOrDefault(x => x != _mainAudioSource && x != _blendAudioSource);
+                if (audioSource == null)
                 {
-                    Debug.Log($"Main AudioSource is playing same clip: {audioClip}");
+                    Debug.Log("All audio sources for this theme are already playing, returning");
+                    return;
+                }
+                
+                if (audioSource == _mainAudioSource && _mainAudioSource != null)
+                {
+                    Debug.Log($"Main AudioSource is already playing same clip: {_mainAudioSource.Clip}");
                     return;
                 }
 
-                var clipState = GetClipState(audioClip);
+                if (_mainAudioSource != null)
+                    Debug.Log($"Selected audio source with clip: {_mainAudioSource.Clip}");
 
-                if (_mainAudioSource.IsPlaying)
+                _blendAudioSource?.Pause();
+
+                if (themeMood != null)
                 {
-                    _blendAudioSource.Play(_mainAudioSource.Clip, _mainAudioSource.CurrentTime, true);
+                    _blendAudioSource = _mainAudioSource;
                 }
 
-                _mainAudioSource.Play(clip, timePosition: clipState.LastPosition, true);
-
+                _mainAudioSource = audioSource;
+                _mainAudioSource.Play();
                 if (themeMood != null)
                     SetBlend(themeMood.BlendInCurve);
             }
 
-            private AudioClipPlayState GetClipState(AudioClip audioClip)
+            private void PlayClipByTag(string key, float weightAmount, ThemeMood themeMood = null)
             {
-                var clipState = _playStates.FirstOrDefault(x => x.Clip == audioClip);
-                if (clipState == null)
+                if (string.IsNullOrWhiteSpace(key)) return;
+
+                Debug.Log($"Selecting audio source with tag: {key}, weight: {weightAmount}");
+                var audioSources = _sourceProvider.ProvideClipContainingTag(key);
+                if (audioSources.IsNullOrEmpty())
                 {
-                    _playStates.Add(clipState = new AudioClipPlayState(audioClip));
+                    Debug.Log($"No audio source found for tag: {key}");
+                    return;
                 }
 
-                return clipState;
-            }
+                if (audioSources.Any(x => x == _mainAudioSource))
+                {
+                    Debug.Log($"Theme didn't changed continuing with current theme: {key}");
+                    return;
+                }
 
-            private void SaveCurrentClipState(IAudioSource audioSource)
-            {
-                if (!audioSource.Clip) return;
-                var state = _playStates.FirstOrDefault(x => x.Clip == audioSource.Clip);
-                if (state == null) return;
-                state.LastPosition = audioSource.CurrentTime;
+                var audioSource = audioSources.FirstOrDefault(x => x != _mainAudioSource && x != _blendAudioSource);
+                if (audioSource == null)
+                {
+                    Debug.Log("All audio sources for this theme are already playing, returning");
+                    return;
+                }
+
+                if (audioSource == _mainAudioSource)
+                {
+                    Debug.Log($"Main AudioSource is already playing same clip: {audioSource.Clip}");
+                    return;
+                }
+
+                Debug.Log($"Selected audio source with clip: {audioSource.Clip}");
+
+                _blendAudioSource?.Pause();
+
+                if (themeMood != null)
+                {
+                    _blendAudioSource = _mainAudioSource;
+                }
+
+                _mainAudioSource = audioSource;
+                _mainAudioSource.Play();
+                if (themeMood != null)
+                    SetBlend(themeMood.BlendInCurve);
             }
 
             private void ApplyBlend(ThemeMoodBlend blend)
@@ -203,7 +246,7 @@ namespace Obert.Audio.Runtime.Abstractions
                 }
             }
 
-            private float ProcessBlend(float currentWeight, float amount, MoodBlendType blendType)
+            private static float ProcessBlend(float currentWeight, float amount, MoodBlendType blendType)
             {
                 switch (blendType)
                 {
@@ -224,7 +267,7 @@ namespace Obert.Audio.Runtime.Abstractions
             public void Dispose()
             {
                 _weightedTags.Clear();
-                _playStates.Clear();
+                _sourceProvider?.Dispose();
             }
         }
     }

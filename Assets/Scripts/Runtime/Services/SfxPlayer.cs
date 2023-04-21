@@ -67,7 +67,7 @@ namespace Obert.Audio.Runtime.Services
         {
             if (clip == null) throw new ArgumentNullException(nameof(clip));
 
-            _sources.FirstOrDefault(x => x.CanPlay)?.Play(clip);
+            _sources.FirstOrDefault(x => x.CanPlay)?.PlayOneShot(clip);
         }
     }
 }
