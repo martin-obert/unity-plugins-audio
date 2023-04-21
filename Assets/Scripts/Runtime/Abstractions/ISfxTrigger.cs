@@ -1,4 +1,4 @@
-﻿namespace Obert.Audio.Runtime
+﻿namespace Obert.Audio.Runtime.Abstractions
 {
     public interface ISfxTrigger
     {
