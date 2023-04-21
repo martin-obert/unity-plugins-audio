@@ -18,7 +18,7 @@ namespace Obert.Audio.Runtime.Triggers
 
         public string Tag => tag;
         public ISfxAudioClipBag Bag => bag;
-        public IAudioClip AudioClip => new UnityAudioClip(audioClip);
+        public IAudioClip AudioClip => audioClip == null ? null : new UnityAudioClip(audioClip);
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex,
             AnimatorControllerPlayable controller)

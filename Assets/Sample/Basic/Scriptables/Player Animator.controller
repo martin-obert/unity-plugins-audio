@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag: 
   bag: {fileID: 11400000, guid: 5fa62005ddac68440aa977e167673a79, type: 2}
+  audioClip: {fileID: 0}
 --- !u!1101 &6507094994441343101
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
