@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Obert.Audio.Runtime.Services
 {
-    
     [Serializable]
     public sealed class AudioSourceProvider : IAudioSourceProvider
     {
