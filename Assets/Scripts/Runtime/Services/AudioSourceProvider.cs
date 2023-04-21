@@ -6,9 +6,7 @@ using UnityEngine;
 
 namespace Obert.Audio.Runtime.Services
 {
-    /// <summary>
-    /// Provides audio source from the pool. One audio source is associate with single audio clip.
-    /// </summary>
+    
     [Serializable]
     public sealed class AudioSourceProvider : IAudioSourceProvider
     {
